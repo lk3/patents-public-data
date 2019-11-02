@@ -442,7 +442,7 @@ class Word2Vec:
             valid_dataset = tf.constant(valid_examples, dtype=tf.int32)
 
             # Uses cosine distance to find similarity of matrix elements
-            norm = tf.sqrt(tf.reduce_sum(tf.square(embedding), 1, keep_dims=True))
+            norm = tf.sqrt(tf.reduce_sum(tf.square(embedding), 1, keepdims=True)) # keep_dims is deprecated, use keepdims instead
             normalized_embedding = embedding / norm
             valid_embedding = tf.nn.embedding_lookup(normalized_embedding, valid_dataset)
             similarity = tf.matmul(valid_embedding, tf.transpose(normalized_embedding))
