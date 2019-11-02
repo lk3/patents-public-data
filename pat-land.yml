@@ -18,9 +18,9 @@ dependencies:
   - libprotobuf=3.6.0
   - protobuf=3.6.0
   - pip:
-    - tensorflow=1.10.0
+    - tensorflow==1.10.0
     - google-cloud==0.34.0
     - google-cloud-storage==1.21.0
-    - google-api-python-client=1.7.11
-    - pandas-gbq=0.10.0
+    - google-api-python-client==1.7.11
+    - pandas-gbq==0.10.0
     - nbresuse==0.3.2
