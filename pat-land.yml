@@ -17,6 +17,7 @@ dependencies:
   - seaborn=0.9.0
   - libprotobuf=3.6.0
   - protobuf=3.6.0
+  - setuptools=40.4.3
   - pip:
     - tensorflow==1.10.0
     - google-cloud==0.34.0
