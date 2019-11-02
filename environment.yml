@@ -178,7 +178,6 @@ dependencies:
   - zstd=1.4.3=h3b9ef0a_0
   - _libgcc_mutex=0.1=main
   - dbus=1.13.2=h714fa37_1
-  - futures=3.0.3=py35_0
   - gst-plugins-base=1.14.0=hbbd80ab_1
   - gstreamer=1.14.0=hb453b48_1
   - libgcc-ng=9.1.0=hdf63c60_0
@@ -196,3 +195,4 @@ dependencies:
     - google-cloud-storage==1.21.0
     - nbresuse==0.3.2
     - psutil==5.6.3
+    - futures=3.0.3
