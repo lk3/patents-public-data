@@ -96,7 +96,7 @@ class W2VModelDownload:
             blob_file.download_to_filename(file_path)
 
         print('Completed downloading {} files'.format(model_name))
-    
+
 
 class TrainedW2VRuntime:
     w2v_graph = None
@@ -136,14 +136,14 @@ class TrainedW2VRuntime:
         fig, ax = plt.subplots(figsize=(14, 14))
         for idx in range(num_words):
             plt.scatter(*embed_tsne[idx, :], color='steelblue')
-            plt.annotate(self.index_to_word[idx], (embed_tsne[idx, 0], embed_tsne[idx, 1]), alpha=0.7)        
+            plt.annotate(self.index_to_word[idx], (embed_tsne[idx, 0], embed_tsne[idx, 1]), alpha=0.7)
 
     def find_similar(self, word, top_k):
         '''
         Finds the top_k most similar words to the provided word, as determined by calculating
         the cosine distance between the word and the rest of the embedded words, sorting the
         distance, and finally taking only the top_k results.
-        
+
         Note: this should be used for debugging or illustrative purposes only; it's slow!
         '''
         distances = {}
@@ -339,7 +339,7 @@ class Word2Vec:
 
     def load_vocab_mappings(self):
         '''
-        Loads a CSV with a mapping from 
+        Loads a CSV with a mapping from
         '''
         index_to_vocab_df = pd.read_csv(
             self.vocab_file, keep_default_na=False, na_values=[], encoding='latin-1')
@@ -400,7 +400,7 @@ class Word2Vec:
         Creates the Word2Vec graph for use in training and restoring checkpoint files to
         load embeddings. The method returns the graph, the embedding variable and the normalized
         embedding variables that can be used to restore the embedding weights from the TF graph.
-        
+
         You should call this function like this:
         graph, embedding, normalized_embedding = word2vec.create_graph(...params...)
         '''
@@ -434,9 +434,9 @@ class Word2Vec:
             # TODO: parameterize this
             valid_size = 16 # Random set of words to evaluate similarity on.
             valid_window = 100
-            # pick 8 samples from (0,100) and (1000,1100) each ranges. lower id implies more frequent 
+            # pick 8 samples from (0,100) and (1000,1100) each ranges. lower id implies more frequent
             valid_examples = np.array(random.sample(range(valid_window), valid_size//2))
-            valid_examples = np.append(valid_examples, 
+            valid_examples = np.append(valid_examples,
                                        random.sample(range(1000,1000+valid_window), valid_size//2))
 
             valid_dataset = tf.constant(valid_examples, dtype=tf.int32)
@@ -466,7 +466,7 @@ class Word2Vec:
         '''
         Loads the latest checkpoint file for this model into the provided graph,
         returning the embedding weights and normalized embedding weights.
-        
+
         You should use the normalized embedding weights for your embeddings.
         '''
 
@@ -513,7 +513,7 @@ class Word2Vec:
 
                     loss += train_loss
 
-                    if iteration % 500 == 0: 
+                    if iteration % 500 == 0:
                         end = time.time()
                         print("Epoch {}/{}".format(e, epochs),
                               "Iteration: {}".format(iteration),
@@ -571,7 +571,7 @@ class Word2Vec:
             self.subsample_threshold, int_words, int_word_counts, total_wordcount)
         print("Total words in corpus: {}, vocab size: {}, num words used for training: {}".format(
             total_wordcount, len(int_word_counts), len(train_words)))
-        
+
         # after preprocessing, save things off to disk so we can restore settings later
         print('Saving model config, vocab word-to-index mapping, and word corpus to models/{}.'.format(self.model_name))
         self.save_vocab_mapping(int_to_vocab)
@@ -583,5 +583,5 @@ class Word2Vec:
 
         print('Training model for {} epochs.'.format(num_epochs))
         self.train(w2v_graph, int_to_vocab, train_words, num_epochs, batch_size, window_size)
-        
+
         return w2v_graph.train_graph, w2v_graph.embedding, w2v_graph.normalized_embedding
