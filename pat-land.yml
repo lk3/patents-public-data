@@ -3,6 +3,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - python=3.5.5
   - jupyter=1.0.0
   - ipython=7.0.1
   - nb_conda=2.2.0
